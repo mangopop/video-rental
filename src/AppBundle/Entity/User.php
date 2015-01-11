@@ -42,14 +42,14 @@ class User
     /**
      * @var \Doctrine\Common\Collections\Collection
      */
-    private $rentals;
+    private $videos;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->rentals = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->videos = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
     /**
@@ -178,35 +178,35 @@ class User
     }
 
     /**
-     * Add rentals
+     * Add videos
      *
-     * @param \AppBundle\Entity\Video $rentals
+     * @param \AppBundle\Entity\Video $videos
      * @return User
      */
-    public function addRental(\AppBundle\Entity\Video $rentals)
+    public function addVideo(\AppBundle\Entity\Video $videos)
     {
-        $this->rentals[] = $rentals;
+        $this->videos[] = $videos;
 
         return $this;
     }
 
     /**
-     * Remove rentals
+     * Remove videos
      *
-     * @param \AppBundle\Entity\Video $rentals
+     * @param \AppBundle\Entity\Video $videos
      */
-    public function removeRental(\AppBundle\Entity\Video $rentals)
+    public function removeVideo(\AppBundle\Entity\Video $videos)
     {
-        $this->rentals->removeElement($rentals);
+        $this->videos->removeElement($videos);
     }
 
     /**
-     * Get rentals
+     * Get videos
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getRentals()
+    public function getVideos()
     {
-        return $this->rentals;
+        return $this->videos;
     }
 }

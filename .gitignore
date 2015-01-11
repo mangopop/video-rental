@@ -2,3 +2,4 @@ app/Cache/*
 app/logs/*
 src/acme/*
 .idea/*
+.gitignore

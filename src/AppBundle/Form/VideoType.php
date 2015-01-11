@@ -18,7 +18,7 @@ class VideoType extends AbstractType
             ->add('title')
             ->add('certificate')
             ->add('director')
-            ->add('users')
+//            ->add('users')
         ;
     }
     

@@ -5,3 +5,12 @@ app:
 _home:
     path: /home
     defaults: { _controller: AppBundle:Default:index }
+
+app_video:
+    resource: "@AppBundle/Resources/config/routing/video.yml"
+    prefix:   /video
+
+app_user:
+    resource: "@AppBundle/Resources/config/routing/user.yml"
+    prefix:   /user
+

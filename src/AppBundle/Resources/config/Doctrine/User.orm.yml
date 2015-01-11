@@ -4,7 +4,7 @@ AppBundle\Entity\User:
     manyToMany:
         videos:
             targetEntity: Video
-            mappedBy: User
+            mappedBy: users
     id:
         id:
             type: integer

@@ -6,7 +6,7 @@ AppBundle\Entity\Video:
         users:
         #name entity
             targetEntity: User
-            #what's the inverse (onetomany)
+            #what's the inverse
             inversedBy: videos
             #it's going to add a column in this table name
             joinColumn:
