@@ -1,0 +1,7 @@
+app:
+    resource: @AppBundle/Controller/
+#    type:     yml
+
+_home:
+    path: /home
+    defaults: { _controller: AppBundle:Default:index }

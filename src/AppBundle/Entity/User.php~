@@ -1,0 +1,14 @@
+<?php
+/**
+ * Created by PhpStorm.
+ * User: simon
+ * Date: 10/01/15
+ * Time: 19:51
+ */
+
+namespace AppBundle\Entity;
+
+
+class User {
+
+} 

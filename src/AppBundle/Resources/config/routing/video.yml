@@ -1,0 +1,30 @@
+video:
+    path:     /
+    defaults: { _controller: "AppBundle:Video:index" }
+
+video_show:
+    path:     /{id}/show
+    defaults: { _controller: "AppBundle:Video:show" }
+
+video_new:
+    path:     /new
+    defaults: { _controller: "AppBundle:Video:new" }
+
+video_create:
+    path:     /create
+    defaults: { _controller: "AppBundle:Video:create" }
+    requirements: { _method: post }
+
+video_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "AppBundle:Video:edit" }
+
+video_update:
+    path:     /{id}/update
+    defaults: { _controller: "AppBundle:Video:update" }
+    requirements: { _method: post|put }
+
+video_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppBundle:Video:delete" }
+    requirements: { _method: post|delete }
