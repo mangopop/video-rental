@@ -12,11 +12,11 @@ namespace AppBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 //use AppBundle\Form\Video_userType;
-use AppBundle\Entity\UserVideos;
+use AppBundle\Entity\Rentals;
 use AppBundle\Entity\Video;
 use Symfony\Component\HttpFoundation\Request;
 
-class VideoUserController extends Controller{
+class RentalsController extends Controller{
 
     /**
      * displays a form to assign video to user
@@ -27,20 +27,19 @@ class VideoUserController extends Controller{
     {
 
         //$videos = $em->findAll('User');
-        $emanager = $this->getDoctrine()->getManager();
-        $videos = $emanager->getRepository('AppBundle:Video')->findAll();
+//        $emanager = $this->getDoctrine()->getManager();
+//        $videos = $emanager->getRepository('AppBundle:Video')->findAll();
 
-        $user_video = new UserVideos();
-        $user_video->setUserId($id);
+        $rental = new Rentals();
+//        /$rental->setUser($id);
 
-        $form = $this->createFormBuilder($user_video)
+        $form = $this->createFormBuilder($rental)
             ->add('user_id', 'hidden')
             ->add('video_id', 'entity', array(
                     //'multiple'      => true,
                     //'expanded'      => true,
                     'class' => 'AppBundle:Video',
                     'property' => 'title',
-
 //                    'error_bubbling' => true,
 //                    'required' => true,
                 ))
@@ -53,7 +52,7 @@ class VideoUserController extends Controller{
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $em->persist($user_video);
+            $em->persist($rental);
             $em->flush();
 
             return $this->redirect($this->generateUrl('/'));

@@ -5,92 +5,104 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * UserVideos
+ * @ORM\Entity
  */
-class UserVideos
+class Rentals
 {
     /**
-     * @var integer
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue(strategy="AUTO")
      */
-    private $user_id;
+    private $id;
 
     /**
-     * @var integer
-     */
-    private $video_id;
-
-    /**
-     * @var \DateTime
+     * @ORM\Column(type="date")
      */
     private $out_date;
 
     /**
-     * @var integer
+     * @ORM\Column(type="integer")
      */
     private $arranged_days_rented;
 
     /**
-     * @var integer
+     * @ORM\Column(type="integer")
      */
     private $actual_days_rented;
 
     /**
-     * @var \AppBundle\Entity\Video
+     * @ORM\ManyToOne(targetEntity="User", inversedBy="rentals")
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=FALSE)
      */
-    private $id;
+    protected $user;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="Video", inversedBy="rentals")
+     * @ORM\JoinColumn(name="video_id", referencedColumnName="id", nullable=FALSE)
+     */
+    protected $video;
 
 
     /**
-     * Set user_id
+     * @return mixed
+     */
+    public function getId()
+    {
+        return $this->id;
+    }
+
+    /**
+     * Set user
      *
      * @param integer $userId
-     * @return UserVideos
+     * @return Rentals
      */
-    public function setUserId($userId)
+    public function setUser($user)
     {
-        $this->user_id = $userId;
+        $this->user = $user;
 
         return $this;
     }
 
     /**
-     * Get user_id
+     * Get user
      *
      * @return integer 
      */
-    public function getUserId()
+    public function getUser()
     {
-        return $this->user_id;
+        return $this->user;
     }
 
     /**
-     * Set video_id
+     * Set video
      *
      * @param integer $videoId
-     * @return UserVideos
+     * @return Rentals
      */
-    public function setVideoId($videoId)
+    public function setVideo($video)
     {
-        $this->video_id = $videoId;
+        $this->video = $video;
 
         return $this;
     }
 
     /**
-     * Get video_id
+     * Get video
      *
      * @return integer 
      */
-    public function getVideoId()
+    public function getVideo()
     {
-        return $this->video_id;
+        return $this->video;
     }
 
     /**
      * Set out_date
      *
      * @param \DateTime $outDate
-     * @return UserVideos
+     * @return Rentals
      */
     public function setOutDate($outDate)
     {
@@ -113,7 +125,7 @@ class UserVideos
      * Set arranged_days_rented
      *
      * @param integer $arrangedDaysRented
-     * @return UserVideos
+     * @return Rentals
      */
     public function setArrangedDaysRented($arrangedDaysRented)
     {
@@ -136,7 +148,7 @@ class UserVideos
      * Set actual_days_rented
      *
      * @param integer $actualDaysRented
-     * @return UserVideos
+     * @return Rentals
      */
     public function setActualDaysRented($actualDaysRented)
     {
@@ -155,26 +167,5 @@ class UserVideos
         return $this->actual_days_rented;
     }
 
-    /**
-     * Set id
-     *
-     * @param \AppBundle\Entity\Video $id
-     * @return UserVideos
-     */
-    public function setId(\AppBundle\Entity\Video $id = null)
-    {
-        $this->id = $id;
 
-        return $this;
-    }
-
-    /**
-     * Get id
-     *
-     * @return \AppBundle\Entity\Video 
-     */
-    public function getId()
-    {
-        return $this->id;
-    }
 }

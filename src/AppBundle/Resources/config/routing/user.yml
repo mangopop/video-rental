@@ -32,4 +32,4 @@ user_delete:
 #custom route
 user_addVideo:
     path:     /{id}/add_video
-    defaults: { _controller: "AppBundle:VideoUser:userAddVideo" }
+    defaults: { _controller: "AppBundle:Rentals:userAddVideo" }

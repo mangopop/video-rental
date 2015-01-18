@@ -5,41 +5,44 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * Video
+ * @ORM\Entity
+ * @ORM\Table(name="videos")
  */
 class Video
 {
     /**
-     * @var integer
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue
      */
-    private $id;
+    protected $id;
 
     /**
-     * @var string
+     * @ORM\Column(type="string")
      */
     private $title;
 
     /**
-     * @var string
+     * @ORM\Column(type="integer")
      */
     private $certificate;
 
     /**
-     * @var string
+     * @ORM\Column(type="string")
      */
     private $director;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @ORM\OneToMany(targetEntity="Rentals", mappedBy="video")
      */
-    private $videoId;
+    private $rentals;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->videoId = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->rentals = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 
@@ -128,36 +131,37 @@ class Video
         return $this->director;
     }
 
+
     /**
-     * Add videoId
+     * Add rentals
      *
-     * @param \AppBundle\Entity\UserVideos $videoId
-     * @return Video
+     * @param \AppBundle\Entity\Rentals $rentals
+     * @return User
      */
-    public function addVideoId(\AppBundle\Entity\UserVideos $videoId)
+    public function addRental(\AppBundle\Entity\Rentals $rental)
     {
-        $this->videoId[] = $videoId;
+        $this->rentals[] = $rental;
 
         return $this;
     }
 
     /**
-     * Remove videoId
+     * Remove rentals
      *
-     * @param \AppBundle\Entity\UserVideos $videoId
+     * @param \AppBundle\Entity\Rentals $rentals
      */
-    public function removeVideoId(\AppBundle\Entity\UserVideos $videoId)
+    public function removeRentals(\AppBundle\Entity\Rentals $rental)
     {
-        $this->videoId->removeElement($videoId);
+        $this->rentals->removeElement($rental);
     }
 
     /**
-     * Get videoId
+     * Get rentals
      *
-     * @return \Doctrine\Common\Collections\Collection 
+     * @return \Doctrine\Common\Collections\Collection
      */
-    public function getVideoId()
+    public function getRentals()
     {
-        return $this->videoId;
+        return $this->rentals;
     }
 }

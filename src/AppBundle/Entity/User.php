@@ -5,52 +5,56 @@ namespace AppBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * User
+ * @ORM\Entity
+ * @ORM\Table(name="users")
  */
 class User
 {
     /**
-     * @var integer
+     * @ORM\Column(type="integer")
+     * @ORM\Id
+     * @ORM\GeneratedValue
      */
-    private $id;
+    protected $id;
 
     /**
-     * @var string
+     * @ORM\Column(type="string")
      */
-    private $firstname;
+    protected $firstname;
 
     /**
-     * @var string
+     * @ORM\Column(type="string")
      */
-    private $lastname;
+    protected $lastname;
 
     /**
-     * @var string
+     * @ORM\Column(type="string")
      */
-    private $username;
+    protected $username;
 
     /**
-     * @var string
+     * @ORM\Column(type="string")
      */
-    private $password;
+    protected $password;
 
     /**
-     * @var string
+     * @ORM\Column(type="string")
      */
-    private $email;
+    protected $email;
 
     /**
-     * @var \Doctrine\Common\Collections\Collection
+     * @ORM\OneToMany(targetEntity="Rentals", mappedBy="user")
      */
-    private $userId;
+    protected $rentals;
 
     /**
      * Constructor
      */
     public function __construct()
     {
-        $this->userId = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->rentals = new \Doctrine\Common\Collections\ArrayCollection();
     }
+
 
     /**
      * Get id
@@ -178,35 +182,35 @@ class User
     }
 
     /**
-     * Add userId
+     * Add rentals
      *
-     * @param \AppBundle\Entity\UserVideos $userId
+     * @param \AppBundle\Entity\Rentals $rentals
      * @return User
      */
-    public function addUserId(\AppBundle\Entity\UserVideos $userId)
+    public function addRental(\AppBundle\Entity\Rentals $rental)
     {
-        $this->userId[] = $userId;
+        $this->rentals[] = $rental;
 
         return $this;
     }
 
     /**
-     * Remove userId
+     * Remove rentals
      *
-     * @param \AppBundle\Entity\UserVideos $userId
+     * @param \AppBundle\Entity\Rentals $rentals
      */
-    public function removeUserId(\AppBundle\Entity\UserVideos $userId)
+    public function removeRentals(\AppBundle\Entity\Rentals $rental)
     {
-        $this->userId->removeElement($userId);
+        $this->rentals->removeElement($rental);
     }
 
     /**
-     * Get userId
+     * Get rentals
      *
      * @return \Doctrine\Common\Collections\Collection 
      */
-    public function getUserId()
+    public function getRentals()
     {
-        return $this->userId;
+        return $this->rentals;
     }
 }
