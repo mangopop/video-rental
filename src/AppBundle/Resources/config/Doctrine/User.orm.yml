@@ -1,10 +1,17 @@
+# A bidirectional relationship has both an owning side and an inverse side
+# A unidirectional relationship only has an owning side.
+# The owning side has to use the inversedBy
+# ManyToOne is always the owning side of a bidirectional association.
+
+# this is the inversed side, so we use 'mappedBy'
 AppBundle\Entity\User:
+
     type: entity
-    table: users
-    manyToMany:
-        videos:
-            targetEntity: Video
-            mappedBy: users
+    oneToMany:
+      userId: # targets field
+        targetEntity: UserVideos
+        mappedBy: id # has to be a field for this entity
+
     id:
         id:
             type: integer

@@ -3,7 +3,7 @@ app:
 #    type:     yml
 
 _home:
-    path: /home
+    path: /
     defaults: { _controller: AppBundle:Default:index }
 
 app_video:
@@ -13,4 +13,3 @@ app_video:
 app_user:
     resource: "@AppBundle/Resources/config/routing/user.yml"
     prefix:   /user
-

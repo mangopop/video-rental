@@ -1,0 +1,45 @@
+# this is the owning side so we inverse
+AppBundle\Entity\UserVideos:
+    type: entity
+    table: user_videos
+    manyToOne:
+      id: # the targets field and should match mappedBy
+        targetEntity: User
+        inversedBy: userId # there are examples where this isn't used.
+        joinColumn: # all below optional, doctrine will guess
+        #table: user
+          name: userId # should be like mappedBy i.e. user with id appended
+          referencedColumnName: id
+
+    manyToOne:
+      id: # the targets field and should match mappedBy
+        targetEntity: Video
+        inversedBy: videoId
+        joinColumn: # all below optional, doctrine will guess
+        #table: video
+          name: videoId
+          referencedColumnName: id
+
+    id:
+        user_id:
+            type: integer
+        video_id:
+            type: integer
+    fields:
+        out_date:
+           type: date
+        arranged_days_rented:
+            type: integer
+        actual_days_rented:
+            type: integer
+#        video_id:
+#            type: integer
+#            length: 5
+#        user_id:
+#            type: integer
+#            length: 5
+
+#A bidirectional relationship has both an owning side and an inverse side
+#A unidirectional relationship only has an owning side.
+#The owning side has to use the inversedBy
+#ManyToOne is always the owning side of a bidirectional association.

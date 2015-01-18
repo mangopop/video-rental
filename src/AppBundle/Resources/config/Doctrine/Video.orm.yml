@@ -1,17 +1,11 @@
 AppBundle\Entity\Video:
+
     type: entity
-    table: videos
-    manyToMany:
-    #what table
-        users:
-        #name entity
-            targetEntity: User
-            #what's the inverse
-            inversedBy: videos
-            #it's going to add a column in this table name
-            joinColumn:
-                name: user_id
-                referencedColumnName: id
+    oneToMany:
+      videoId: # targets field
+        targetEntity: UserVideos
+        mappedBy: id
+
     id:
         id:
             type: integer

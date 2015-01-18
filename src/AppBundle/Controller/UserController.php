@@ -205,6 +205,7 @@ class UserController extends Controller
         return $this->redirect($this->generateUrl('user'));
     }
 
+
     /**
      * Creates a form to delete a User entity by id.
      *

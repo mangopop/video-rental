@@ -28,3 +28,8 @@ user_delete:
     path:     /{id}/delete
     defaults: { _controller: "AppBundle:User:delete" }
     requirements: { _method: post|delete }
+
+#custom route
+user_addVideo:
+    path:     /{id}/add_video
+    defaults: { _controller: "AppBundle:VideoUser:userAddVideo" }
