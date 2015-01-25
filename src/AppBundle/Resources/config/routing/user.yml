@@ -30,6 +30,12 @@ user_delete:
     requirements: { _method: post|delete }
 
 #custom route
-user_addVideo:
-    path:     /{id}/add_video
-    defaults: { _controller: "AppBundle:Rentals:userAddVideo" }
+user_add_rental:
+    path:     /{id}/add_rental
+    defaults: { _controller: "AppBundle:Rentals:userAddRental" }
+user_edit_rental:
+    path:     /{id}/edit_rental/{rental_id}
+    defaults: { _controller: "AppBundle:Rentals:userEditRental" }
+user_delete_rental:
+    path:     /{id}/delete_video/{rental_id}
+    defaults: { _controller: "AppBundle:Rentals:userDeleteRental" }

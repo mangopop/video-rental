@@ -43,7 +43,7 @@ class User
     protected $email;
 
     /**
-     * @ORM\OneToMany(targetEntity="Rentals", mappedBy="user")
+     * @ORM\OneToMany(targetEntity="Rentals", mappedBy="user",cascade={"remove"})
      */
     protected $rentals;
 

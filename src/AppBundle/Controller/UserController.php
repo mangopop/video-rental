@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use AppBundle\Entity\User;
+use AppBundle\Entity\Rentals;
 use AppBundle\Form\UserType;
 
 /**
@@ -95,16 +96,43 @@ class UserController extends Controller
     {
         $em = $this->getDoctrine()->getManager();
 
-        $entity = $em->getRepository('AppBundle:User')->find($id);
+        $user = $em->getRepository('AppBundle:User')->find($id);
 
-        if (!$entity) {
+        $rentals = $user->getRentals();//can't loop through this
+        //$rentals = $user->getRentals()->getTitle();//error
+
+        $rental_details = array();
+
+        $i = 0;
+        foreach ($rentals as $rental) {
+                $rental_details[$i]['arranged'] = $rental->getArrangedDaysRented();
+                $rental_details[$i]['actual'] = $rental->getActualDaysRented();
+                $rental_details[$i]['id'] = $rental->getId();
+                $rental_details[$i]['title'] = $rental->getVideo()->getTitle();
+            $i ++;
+        }
+
+        var_dump($rental_details);
+
+//        var_dump($rentals);//cannot see data, but must be there
+//        //var_dump($rentals->getArrangedDaysRented()); //doesn't work
+//        var_dump($rentals[0]->getArrangedDaysRented()); //works
+//        var_dump($rentals[1]->getArrangedDaysRented()); //works
+//
+//        $videos = $rentals[0]->getVideo();
+//        var_dump($videos->getTitle());
+
+
+
+        if (!$user) {
             throw $this->createNotFoundException('Unable to find User entity.');
         }
 
         $deleteForm = $this->createDeleteForm($id);
 
         return $this->render('AppBundle:User:show.html.twig', array(
-            'entity'      => $entity,
+            'user'      => $user,
+            'rentals'   => $rental_details,
             'delete_form' => $deleteForm->createView(),
         ));
     }

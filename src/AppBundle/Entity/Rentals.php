@@ -33,13 +33,13 @@ class Rentals
 
     /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="rentals")
-     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=FALSE)
+     * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=FALSE, onDelete="cascade")
      */
     protected $user;
 
     /**
      * @ORM\ManyToOne(targetEntity="Video", inversedBy="rentals")
-     * @ORM\JoinColumn(name="video_id", referencedColumnName="id", nullable=FALSE)
+     * @ORM\JoinColumn(name="video_id", referencedColumnName="id", nullable=FALSE, onDelete="cascade")
      */
     protected $video;
 
@@ -53,12 +53,11 @@ class Rentals
     }
 
     /**
-     * Set user
-     *
-     * @param integer $userId
-     * @return Rentals
+     * Set User
+     * @param User $user
+     * @return $this
      */
-    public function setUser($user)
+    public function setUser(User $user = null)
     {
         $this->user = $user;
 
@@ -76,12 +75,11 @@ class Rentals
     }
 
     /**
-     * Set video
-     *
-     * @param integer $videoId
-     * @return Rentals
+     * Set Video
+     * @param Video $video
+     * @return $this
      */
-    public function setVideo($video)
+    public function setVideo(Video $video = null)
     {
         $this->video = $video;
 
