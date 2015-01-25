@@ -1,0 +1,15 @@
+{% if rentals is defined %}
+
+        <h3>Videos Rented</h3>
+        {% for rental in rentals %}
+            <ul>
+                <li>Days arranged: {{ rental.arranged }}</li>
+                <li>Days out:{{ rental.actual }}</li>
+                <li>Title: {{ rental.title }}</li>
+
+            </ul>
+            <hr>
+        {% endfor %}
+
+{% endif %}
+<li><a href="{{ path('user_edit_rental', { 'id': user.id, 'rental_id': rental.id }) }}">Edit</a> </li>

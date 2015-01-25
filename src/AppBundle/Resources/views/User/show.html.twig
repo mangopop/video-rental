@@ -45,16 +45,24 @@
 
 
         <div class="small-5 columns">
-        {% for rental in rentals %}
-            <ul>
-                <li>Days arranged: {{ rental.arranged }}</li>
-                <li>Days out:{{ rental.actual }}</li>
-                <li>Title: {{ rental.title }}</li>
 
-                <li><a href="{{ path('user_edit_rental', { 'id': user.id, 'rental_id': rental.id }) }}">Edit</a> </li>
-            </ul>
-            <hr>
-        {% endfor %}
+            {% if rentals is defined %}
+
+                <h3>Videos Rented</h3>
+                {% for rental in rentals %}
+                    <ul>
+                        <li>Days arranged: {{ rental.arranged }}</li>
+                        <li>Days out:{{ rental.actual }}</li>
+                        <li>Title: {{ rental.title }}</li>
+                        <li><a href="{{ path('user_edit_rental', { 'id': user.id, 'rental_id': rental.id }) }}">Edit {{ rental.id }}</a> </li>
+                    </ul>
+                    <hr>
+                {% endfor %}
+
+            {% endif %}
+
+
+            <a href="{{ path('user_add_rental', {'id': user.id}) }}">Add new</a>
         </div>
 
     </div>

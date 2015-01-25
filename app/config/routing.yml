@@ -3,7 +3,7 @@ app:
 #    type:     yml
 
 home:
-    path: /
+    path: /home
     defaults: { _controller: AppBundle:Default:index }
 
 app_video:

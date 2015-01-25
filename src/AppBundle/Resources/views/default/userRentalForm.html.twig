@@ -1,10 +1,11 @@
 {% extends 'AppBundle::base.html.twig' %}
 
 {% block body -%}
-    <h1>Add video for [User]</h1>
+    <h1>{{ title }}</h1>
 
     <div class="row">
         <div class="small-6 columns">
+            <a href="{{ path('user', {'id': id }) }}">Back to the list</a>
             {{ form_start(form) }}
 
             {{ form_errors(form) }}
@@ -27,19 +28,25 @@
 
             {{ form_end(form) }}
         </div>
-        {% if rentals is defined %}
-            <div class="small-6 columns">
-                {% for rental in rentals %}
-                    <ul>
-                        <li>Days arranged: {{ rental.arranged }}</li>
-                        <li>Days out:{{ rental.actual }}</li>
-                        <li>Title: {{ rental.title }}</li>
+         <div class="small-6 columns">
+             {% if rentals is defined %}
 
-                    </ul>
-                    <hr>
-                {% endfor %}
-            </div>
-        {% endif %}
+                 <h3>Videos Rented</h3>
+                 {% for rental in rentals %}
+                     <ul>
+                         <li>Days arranged: {{ rental.arranged }}</li>
+                         <li>Days out:{{ rental.actual }}</li>
+                         <li>Title: {{ rental.title }}</li>
+                         <li><a href="{{ path('user_edit_rental', { 'id': id, 'rental_id': rental.id }) }}">Edit</a> </li>
+                     </ul>
+                     <hr>
+                 {% endfor %}
+                 <a href="{{ path('user_add_rental', {'id': id}) }}">Add new</a>
+             {% endif %}
+
+
+        </div>
+
 
     </div>
 

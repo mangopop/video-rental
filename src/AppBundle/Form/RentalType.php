@@ -41,15 +41,15 @@ class RentalType extends AbstractType
 //                    'error_bubbling' => true,
 //                    'required' => true,
                 ))
-            ->add('out_date', 'date')
+            ->add('out_date', 'date',array('widget' => 'single_text'))
             ->add('arranged_days_rented', 'integer')
             ->add('actual_days_rented', 'integer')
-            ->add('save', 'submit', array('label' => 'Add video(s)'))
+            //->add('save', 'submit', array('label' => 'Add video(s)')) //shouldn't put this there
         ;
 
         // add a normal text field, but add your transformer to it
         $builder->add(
-            $builder->create('user', 'text') //can't call getid when default data is used
+            $builder->create('user', 'hidden') //can't call getid when default data is used
                 //this seems to try and transform if we add a value before submit
                 ->addModelTransformer($transformer)//transforms to a string/norm to model AND vice versa
         );

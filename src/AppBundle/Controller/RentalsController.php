@@ -24,6 +24,7 @@ class RentalsController extends Controller{
     public function userAddRentalAction(Request $request, $id)
     {
 
+
         /*
          because this form now expects an object (tried to pass number in form doesn't work)
          we're going to have to look at using something like $task->getTags()->add($tag1);
@@ -60,6 +61,8 @@ class RentalsController extends Controller{
             //'data' => $user
         ));
 
+        $form->add('submit', 'submit', array('label' => 'Add Video(s)'));
+
         //return $form;
 
 //        $form = $this->createFormBuilder($rental)
@@ -95,6 +98,8 @@ class RentalsController extends Controller{
 
         return $this->render('AppBundle:default:UserRentalForm.html.twig',array(
                 'rentals' => $rental_details,
+                'title' => 'Add Rental form',
+                'id' => $id,
                 'form' => $form->createView(),
             ));
     }
@@ -147,10 +152,23 @@ class RentalsController extends Controller{
                 'em' => $this->getDoctrine()->getManager(), //why do I pass this
             ));
 
+        $form->add('submit', 'submit', array('label' => 'Save Edit'));
+
         //...process form
+        $form->handleRequest($request);
+
+        if ($form->isValid()) {
+            $em = $this->getDoctrine()->getManager();
+            $em->persist($rental);
+            $em->flush();
+
+            return $this->redirect($this->generateUrl('home'));
+        }
 
         return $this->render('AppBundle:default:UserRentalForm.html.twig',array(
                 'form' => $form->createView(),
+                'title' => 'Edit form',
+                'id' => $id
             ));
     }
 }
