@@ -23,6 +23,7 @@ class RentalsController extends Controller{
      */
     public function userAddRentalAction(Request $request, $id)
     {
+        //TODO get a blank rental object and add user
 
 
         /*
@@ -35,28 +36,16 @@ class RentalsController extends Controller{
         $user = $em->getRepository('AppBundle:User')->find($id);
 
         //create a service
-        $rentals = $user->getRentals();//can't loop through this
+        //$rentals = $user->getRentals();//can't loop through this
         //$rentals = $user->getRentals()->getTitle();//error
 
-        // ************* show the rentals on the page ******************//
-
-        $rental_details = array();
-
-        $i = 0;
-        foreach ($rentals as $rental) {
-            $rental_details[$i]['arranged'] = $rental->getArrangedDaysRented();
-            $rental_details[$i]['actual'] = $rental->getActualDaysRented();
-            $rental_details[$i]['title'] = $rental->getVideo()->getTitle();
-            $i ++;
-        }
-
-        // ******************* end ************************** //
-
         $rental = new Rentals();
+        $rental->setUser($user);
+
 
         //$rental->setUser($user); // expected numeric
 
-        $form = $this->createForm(new RentalType($user), $rental, array(
+        $form = $this->createForm(new RentalType(), $rental, array(
             'em' => $this->getDoctrine()->getManager(),
             //'data' => $user
         ));
@@ -93,11 +82,11 @@ class RentalsController extends Controller{
             $em->persist($rental);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('_home'));
+            return $this->redirect($this->generateUrl('user_show', array('id' => $id)));
         }
 
         return $this->render('AppBundle:default:UserRentalForm.html.twig',array(
-                'rentals' => $rental_details,
+                //'rentals' => $rental_details,
                 'title' => 'Add Rental form',
                 'id' => $id,
                 'form' => $form->createView(),

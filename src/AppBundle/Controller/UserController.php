@@ -112,7 +112,7 @@ class UserController extends Controller
             $i ++;
         }
 
-        var_dump($rental_details);
+        //var_dump($rental_details);
 
 //        var_dump($rentals);//cannot see data, but must be there
 //        //var_dump($rentals->getArrangedDaysRented()); //doesn't work

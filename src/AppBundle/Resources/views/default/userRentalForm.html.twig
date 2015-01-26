@@ -29,6 +29,7 @@
             {{ form_end(form) }}
         </div>
          <div class="small-6 columns">
+             {# need to not show this when adding a new form for a user that has no videos #}
              {% if rentals is defined %}
 
                  <h3>Videos Rented</h3>
