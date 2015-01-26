@@ -2,12 +2,15 @@
 
 namespace AppBundle\Controller;
 
+use DateInterval;
+use DateTime;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 use AppBundle\Entity\User;
 use AppBundle\Entity\Rentals;
 use AppBundle\Form\UserType;
+use Symfony\Component\Validator\Constraints\Date;
 
 /**
  * User controller.
@@ -102,14 +105,37 @@ class UserController extends Controller
         //$rentals = $user->getRentals()->getTitle();//error
 
         $rental_details = array();
+        $current_date = date("d-m-Y");
 
         $i = 0;
         foreach ($rentals as $rental) {
+            if($rental->getArchived() === 0){
+
                 $rental_details[$i]['arranged'] = $rental->getArrangedDaysRented();
+                $rental_details[$i]['date'] =  $rental->getOutDate();
+
+                //convert date out to day
+                $date_out = $rental->getOutDate();
+                //that's fucked up that I have to do this
+                foreach ($date_out as $prop) {
+                    $date_out_arr[] = $prop;
+                }
+
+                $dateTime = new DateTime($current_date);
+                $dateTime2 = new DateTime($date_out_arr[0]);
+                $interval = $dateTime->diff($dateTime2);
+                //var_dump($interval); //interesting data
+
+//                $dateTime = new DateTime($current_date);
+//                $dateTime->sub(new DateInterval("P".$date_out_day."D"));
+
+                $rental_details[$i]['days_over'] = $interval->format('%d Days, %m Months, %y Years');
+
                 $rental_details[$i]['actual'] = $rental->getActualDaysRented();
                 $rental_details[$i]['id'] = $rental->getId();
                 $rental_details[$i]['title'] = $rental->getVideo()->getTitle();
             $i ++;
+            }
         }
 
         //var_dump($rental_details);

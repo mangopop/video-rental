@@ -43,7 +43,7 @@ class RentalType extends AbstractType
                 ))
             ->add('out_date', 'date',array('widget' => 'single_text'))
             ->add('arranged_days_rented', 'integer')
-            ->add('actual_days_rented', 'integer')
+            //->add('actual_days_rented', 'integer') //save on archive
             //->add('save', 'submit', array('label' => 'Add video(s)')) //shouldn't put this there
         ;
 

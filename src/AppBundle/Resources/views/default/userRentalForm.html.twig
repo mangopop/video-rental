@@ -28,25 +28,26 @@
 
             {{ form_end(form) }}
         </div>
-         <div class="small-6 columns">
-             {# need to not show this when adding a new form for a user that has no videos #}
-             {% if rentals is defined %}
+         {#<div class="small-6 columns">#}
+             {#&#123;&#35; need to not show this when adding a new form for a user that has no videos &#35;&#125;#}
+             {#{% if rentals is defined %}#}
 
-                 <h3>Videos Rented</h3>
-                 {% for rental in rentals %}
-                     <ul>
-                         <li>Days arranged: {{ rental.arranged }}</li>
-                         <li>Days out:{{ rental.actual }}</li>
-                         <li>Title: {{ rental.title }}</li>
-                         <li><a href="{{ path('user_edit_rental', { 'id': id, 'rental_id': rental.id }) }}">Edit</a> </li>
-                     </ul>
-                     <hr>
-                 {% endfor %}
-                 <a href="{{ path('user_add_rental', {'id': id}) }}">Add new</a>
-             {% endif %}
+                 {#<h3>Videos Rented</h3>#}
+                 {#{% for rental in rentals %}#}
+                     {#<ul>#}
+                         {#<li>Days arranged: {{ rental.arranged }}</li>#}
+                         {#<li>Date out: {{ rental.date |date("m/d/Y")}}</li>#}
+                         {#<li>Days out:{{ rental.actual }}</li>#}
+                         {#<li>Title: {{ rental.title }}</li>#}
+                         {#<li><a href="{{ path('user_edit_rental', { 'id': id, 'rental_id': rental.id }) }}">Edit</a> </li>#}
+                     {#</ul>#}
+                     {#<hr>#}
+                 {#{% endfor %}#}
+                 {#<a href="{{ path('user_add_rental', {'id': id}) }}">Add new</a>#}
+             {#{% endif %}#}
 
 
-        </div>
+        {#</div>#}
 
 
     </div>

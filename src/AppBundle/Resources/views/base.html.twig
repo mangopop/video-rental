@@ -12,10 +12,13 @@
     </head>
     <body>
         {% block nav %}
+        <div class="row">
             <ul class="inline-list">
                 <li><a href="{{ path('home') }}" >Home</a></li>
                 <li><a href="{{ path('user') }}" >Users</a></li>
             </ul>
+        </div>
+        <div class="row">{{ "now"|date("d/m/Y") }}</div>
         {% endblock %}
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}

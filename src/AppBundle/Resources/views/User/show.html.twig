@@ -52,9 +52,11 @@
                 {% for rental in rentals %}
                     <ul>
                         <li>Days arranged: {{ rental.arranged }}</li>
-                        <li>Days out:{{ rental.actual }}</li>
+                        <li>Date out: {{ rental.date |date("m/d/Y") }}</li>
+                        <li>Days over:{{ rental.days_over }} (save on archive) </li>
                         <li>Title: {{ rental.title }}</li>
                         <li><a href="{{ path('user_edit_rental', { 'id': user.id, 'rental_id': rental.id }) }}">Edit {{ rental.id }}</a> </li>
+                        <li><a href="{{ path('user_archive_rental', { 'id': user.id, 'rental_id': rental.id }) }}">Archive {{ rental.id }}</a> </li>
                     </ul>
                     <hr>
                 {% endfor %}

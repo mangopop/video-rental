@@ -32,6 +32,11 @@ class Rentals
     private $actual_days_rented;
 
     /**
+     * @ORM\Column(type="integer")
+     */
+    private $archived;
+
+    /**
      * @ORM\ManyToOne(targetEntity="User", inversedBy="rentals")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id", nullable=FALSE, onDelete="cascade")
      */
@@ -164,6 +169,23 @@ class Rentals
     {
         return $this->actual_days_rented;
     }
+
+    /**
+     * @param mixed $archived
+     */
+    public function setArchived($archived)
+    {
+        $this->archived = $archived;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getArchived()
+    {
+        return $this->archived;
+    }
+
 
 
 }

@@ -9,6 +9,7 @@
 namespace AppBundle\Controller;
 
 use AppBundle\Entity\User;
+use DateTime;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
 use AppBundle\Entity\Rentals;
@@ -151,7 +152,7 @@ class RentalsController extends Controller{
             $em->persist($rental);
             $em->flush();
 
-            return $this->redirect($this->generateUrl('home'));
+            return $this->redirect($this->generateUrl('user_show', array('id' => $id)));
         }
 
         return $this->render('AppBundle:default:UserRentalForm.html.twig',array(
@@ -159,5 +160,38 @@ class RentalsController extends Controller{
                 'title' => 'Edit form',
                 'id' => $id
             ));
+    }
+
+    public function userArchiveRentalAction($rental_id){
+
+        // need to pass the days out to this or calc it here
+
+        $em = $this->getDoctrine()->getManager();
+        $rental = $em->getRepository('AppBundle:Rentals')->find($rental_id);
+
+        //...get actual days rented
+        $current_date = date("d-m-Y");
+        $date_out = $rental->getOutDate();
+
+        //that's fucked up that I have to do this
+        foreach ($date_out as $prop) {
+            $date_out_arr[] = $prop;
+        }
+
+        $dateTime = new DateTime($current_date);
+        $dateTime2 = new DateTime($date_out_arr[0]);
+        $interval = $dateTime->diff($dateTime2);
+
+        $days_out_day = $interval->format('%d');
+
+
+        $rental->setActualDaysRented($days_out_day);
+        $rental->setArchived(1);
+        $em->persist($rental);
+        $em->flush();
+
+
+        return $this->redirect($this->generateUrl('home'));
+
     }
 }

@@ -36,6 +36,6 @@ user_add_rental:
 user_edit_rental:
     path:     /{id}/edit_rental/{rental_id}
     defaults: { _controller: "AppBundle:Rentals:userEditRental" }
-user_delete_rental:
-    path:     /{id}/delete_video/{rental_id}
-    defaults: { _controller: "AppBundle:Rentals:userDeleteRental" }
+user_archive_rental:
+    path:     /{id}/archive_video/{rental_id}
+    defaults: { _controller: "AppBundle:Rentals:userArchiveRental" }
