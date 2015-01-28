@@ -19,7 +19,7 @@ class UserType extends AbstractType
             ->add('lastname')
             ->add('username')
             ->add('password')
-            ->add('email')
+            ->add('email','email')
 //            ->add('videos') get blank page when this is on
         ;
     }

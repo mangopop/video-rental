@@ -20,6 +20,14 @@ framework:
     session:         ~
     fragments:       ~
     http_method_override: true
+#    serializer:
+#            enabled: true
+
+#services:
+#   get_set_method_normalizer:
+#      class: Symfony\Component\Serializer\Normalizer\GetSetMethodNormalizer
+#      tags:
+#         - { name: serializer.normalizer }
 
 # Twig Configuration
 twig:

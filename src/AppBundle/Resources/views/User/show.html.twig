@@ -3,7 +3,7 @@
 {% block body -%}
     <h1>User</h1>
     <div class="row">
-
+        <p>{{ "now"|date("d/m/Y") }}</p>
         <div class="small-5 columns">
             <a href="{{ path('user') }}">Back to the list</a>
             <table class="record_properties">
@@ -23,10 +23,6 @@
                 <tr>
                     <th>Username</th>
                     <td>{{ user.username }}</td>
-                </tr>
-                <tr>
-                    <th>Password</th>
-                    <td>{{ user.password }}</td>
                 </tr>
                 <tr>
                     <th>Email</th>
@@ -51,10 +47,10 @@
                 <h3>Videos Rented</h3>
                 {% for rental in rentals %}
                     <ul>
-                        <li>Days arranged: {{ rental.arranged }}</li>
-                        <li>Date out: {{ rental.date |date("m/d/Y") }}</li>
-                        <li>Days over:{{ rental.days_over }} (save on archive) </li>
                         <li>Title: {{ rental.title }}</li>
+                        <li>Days arranged: {{ rental.arranged }}</li>
+                        <li>Date out: {{ rental.date | date("m/d/Y") }}</li>
+                        <li>Days over:{{ rental.days_over }}</li>
                         <li><a href="{{ path('user_edit_rental', { 'id': user.id, 'rental_id': rental.id }) }}">Edit {{ rental.id }}</a> </li>
                         <li><a href="{{ path('user_archive_rental', { 'id': user.id, 'rental_id': rental.id }) }}">Archive {{ rental.id }}</a> </li>
                     </ul>

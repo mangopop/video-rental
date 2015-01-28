@@ -3,12 +3,22 @@
 namespace AppBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Security\Core\User\UserInterface;
+
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="users")
  */
-class User
+class User Implements UserInterface, \ Serializable
+
+// Userinterface must implement this
+// getRoles()
+// getPassword()
+// getSalt()
+// getUsername()
+// eraseCredentials()
+
 {
     /**
      * @ORM\Column(type="integer")
@@ -48,11 +58,18 @@ class User
     protected $rentals;
 
     /**
+     * @ORM\ManyToMany(targetEntity="Role", inversedBy="users")
+     *
+     */
+    private $roles;
+
+    /**
      * Constructor
      */
     public function __construct()
     {
         $this->rentals = new \Doctrine\Common\Collections\ArrayCollection();
+        $this->roles = new \Doctrine\Common\Collections\ArrayCollection();
     }
 
 
@@ -212,5 +229,65 @@ class User
     public function getRentals()
     {
         return $this->rentals;
+    }
+
+
+
+
+                            ////---------------------------////
+    ////////////////////////////-------- SECURITY ---------/////////////////////////////
+                            ////---------------------------////
+
+    /**
+     * @inheritDoc
+     */
+    public function getSalt()
+    {
+        // you *may* need a real salt depending on your encoder
+        // see section on salt below
+        return null;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function getRoles()
+    {
+        return $this->roles->toArray();
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function eraseCredentials()
+    {
+    }
+
+    /**
+     * @see \Serializable::serialize()
+     */
+    public function serialize()
+    {
+        return serialize(array(
+                $this->id,
+                $this->username,
+                $this->password,
+                // see section on salt below
+                // $this->salt,
+            ));
+    }
+
+    /**
+     * @see \Serializable::unserialize()
+     */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->username,
+            $this->password,
+            // see section on salt below
+            // $this->salt
+            ) = unserialize($serialized);
     }
 }

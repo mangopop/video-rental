@@ -1,17 +1,23 @@
 security:
     encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
+        #Symfony\Component\Security\Core\User\User: plaintext
+        AppBundle\Entity\User:
+          algorithm: bcrypt
+          cost: 12
 
     role_hierarchy:
         ROLE_ADMIN:       ROLE_USER
         ROLE_SUPER_ADMIN: [ROLE_USER, ROLE_ADMIN, ROLE_ALLOWED_TO_SWITCH]
 
     providers:
-        in_memory:
-            memory:
-                users:
-                    user:  { password: userpass, roles: [ 'ROLE_USER' ] }
-                    admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
+        administrators:
+            entity: { class: AppBundle:User, property: username }
+
+#        in_memory:
+#            memory:
+#                users:
+#                    user:  { password: userpass, roles: [ 'ROLE_USER' ] }
+#                    admin: { password: adminpass, roles: [ 'ROLE_ADMIN' ] }
 
     firewalls:
         dev:
@@ -30,10 +36,24 @@ security:
             logout:
                 path:   _demo_logout
                 target: _demo
-            #anonymous: ~
+            anonymous: ~
             #http_basic:
-            #    realm: "Secured Demo Area"
+                #realm: "Secured Demo Area"
+        default:
+            anonymous: ~
+            #http_basic: ~
+            form_login:
+                login_path: /login
+                check_path: /login_check
+                #default_target_path: default_security_target
+            logout:
+                path:   /logout #use path or name!?
+                target: /home
+
 
     access_control:
         - { path: ^/demo/secured/hello/admin/, roles: ROLE_ADMIN }
+        # require ROLE_ADMIN for /admin*
+        - { path: ^/user, roles: ROLE_ADMIN } #regex
+        - { path: ^/video, roles: ROLE_USER } #regex
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }

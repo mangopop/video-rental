@@ -11,14 +11,24 @@
         <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
     </head>
     <body>
+    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
+        <p class="right">Welcome: {{ app.user.firstname }} / <a href="">Logout</a> </p>
+    {% else %}
+        <a href="{{ path('login_route') }}">Login</a>
+    {% endif %}
         {% block nav %}
         <div class="row">
-            <ul class="inline-list">
-                <li><a href="{{ path('home') }}" >Home</a></li>
-                <li><a href="{{ path('user') }}" >Users</a></li>
-            </ul>
+            <div class="small-6 columns">
+                <ul class="inline-list">
+                    <li><a href="{{ path('home') }}" >Home</a></li>
+                    <li><a href="{{ path('user') }}" >Users</a></li>
+                    <li><a href="{{ path('features') }}" >Features</a></li>
+                    <li><a href="{{ path('test') }}" >Test</a></li>
+                </ul>
+            </div>
+
         </div>
-        <div class="row">{{ "now"|date("d/m/Y") }}</div>
+
         {% endblock %}
         {% block body %}{% endblock %}
         {% block javascripts %}{% endblock %}

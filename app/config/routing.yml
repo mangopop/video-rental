@@ -6,6 +6,14 @@ home:
     path: /home
     defaults: { _controller: AppBundle:Default:index }
 
+test:
+    path: /test
+    defaults: { _controller: AppBundle:Default:test }
+
+features:
+    path: /features
+    defaults: { _controller: AppBundle:Default:features }
+
 app_video:
     resource: "@AppBundle/Resources/config/routing/video.yml"
     prefix:   /video
@@ -13,3 +21,13 @@ app_video:
 app_user:
     resource: "@AppBundle/Resources/config/routing/user.yml"
     prefix:   /user
+
+login_route:
+    path:     /login
+    defaults: { _controller: AppBundle:Security:login }
+
+login_check:
+    path: /login_check
+
+log_out:
+    path: /logout
