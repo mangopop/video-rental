@@ -10,6 +10,10 @@ test:
     path: /test
     defaults: { _controller: AppBundle:Default:test }
 
+json:
+    path: /json
+    defaults: { _controller: AppBundle:Default:json }
+
 features:
     path: /features
     defaults: { _controller: AppBundle:Default:features }

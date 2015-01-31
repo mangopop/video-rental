@@ -12,9 +12,9 @@
     </head>
     <body>
     {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        <p class="right">Welcome: {{ app.user.firstname }} / <a href="">Logout</a> </p>
+        <p class="right">Welcome: {{ app.user.firstname }} / <a href="{{ path('log_out') }}">Logout</a> </p>
     {% else %}
-        <a href="{{ path('login_route') }}">Login</a>
+        <p class="right"><a href="{{ path('login_route') }}">Login</a></p>
     {% endif %}
         {% block nav %}
         <div class="row">

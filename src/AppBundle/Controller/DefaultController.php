@@ -26,6 +26,30 @@ class DefaultController extends Controller
             throw new AccessDeniedException();
         }
 
+        return $this->render('AppBundle:default:test.html.twig');
+
+    }
+
+    public function addRoleAction(){
+        //add ROLE_EDITOR to user 2
+        $em = $this->getDoctrine()->getManager();
+        $user = $em->getRepository('AppBundle:User')->find(2);
+        $role = $em->getRepository('AppBundle:Role')->find(3);
+
+        //we don't have addRole() on user to how do we do this? one way?
+        //$user->addRole($role);
+        $role->addUser($user);
+        $user->addRole($role);
+        $em->persist($role);
+        $em->persist($user);
+        $em->flush();
+
+        return new Response('add role page');
+    }
+
+    public function jsonAction(){
+
+
         $encoder = new JsonEncoder();
         $normalizer = new GetSetMethodNormalizer();
         $normalizer->setIgnoredAttributes(array('rentals'));

@@ -10,8 +10,9 @@
                 <th>Firstname</th>
                 <th>Lastname</th>
                 <th>Username</th>
-                <th>Password</th>
+
                 <th>Email</th>
+                <th>Roles</th>
                 <th>Actions</th>
             </tr>
         </thead>
@@ -22,8 +23,12 @@
                 <td>{{ entity.firstname }}</td>
                 <td>{{ entity.lastname }}</td>
                 <td>{{ entity.username }}</td>
-                <td>{{ entity.password }}</td>
                 <td>{{ entity.email }}</td>
+                <td>
+                    {% for role in entity.roles %}
+                    {{ role.name }},
+                    {% endfor %}
+                </td>
                 <td>
                 <ul>
                     <li>

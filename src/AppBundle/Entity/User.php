@@ -256,6 +256,32 @@ class User Implements UserInterface, \ Serializable
         return $this->roles->toArray();
     }
 
+    //note, add remove was required and the naming (not plural and add/remove) is important
+
+    /**
+     * Add role
+     *
+     * @param \AppBundle\Entity\Role $roles
+     * @return Role
+     */
+    public function addRole(\AppBundle\Entity\Role $roles)
+    {
+        $this->roles[] = $roles;
+
+        return $this;
+    }
+
+    /**
+     * Remove roles
+     *
+     * @param \AppBundle\Entity\Role $roles
+     */
+    public function removeRole(\AppBundle\Entity\Role $roles)
+    {
+        $this->roles->removeElement($roles);
+    }
+
+
     /**
      * @inheritDoc
      */
