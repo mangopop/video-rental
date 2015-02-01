@@ -15,29 +15,32 @@ $(document).ready(function () {
             "<div class='row'><div class='small-1 columns'><input type='checkbox'/></div><div class='small-6 columns'><input class='greyed-out' name='task' type='text' placeholder='Task'/></div><div class='small-1 columns end'><input class='button tiny secondary' type='button' value='Delete'/></div></div>"
         );
         added++;
-        console.log('added: '+ added);
+        //console.log('added: '+ added);
     }
 
     //append or remove last row from for depending on text in greyed-out class
-    $(document.body).on('focusin', '.greyed-out' ,function(){
+    $(document.body).on('focusin', 'input[name="task"]' ,function(){
     //$('.greyed-out').focusin(function () {
-        console.log('focus in');
-        //pressed a key, check if they are other greyed-out elements without text in
+        //console.log('focus in');
+
         $(this).keyup(function () {
             var length = $('#feature-form .row').length;
-            //console.log(//'key up');
-            //this doesn't have text make sure this is the last row
             if($(this).val() == ""){
+
                 console.log('no text');
+
                 if(added > 0){
                     $('#feature-form .row')[(length-1)].remove();
                     added--;
                 }
-                console.log('added: '+ added);
-                //check if the last one is blank, add one if not.
+
+            //check if the last one is blank, add one if not.
             }else if($('#feature-form .row').eq(length-1).find("input[name='task']").val() != ""){
+
                 console.log('there is text');
+
                 appendInput();
+
             }
             //why am I looping deal with each one at a time!
 //            $('#feature-form .row').each(function (index, element) {
@@ -63,14 +66,33 @@ $(document).ready(function () {
 
     });
 
-    $('.greyed-out').focusout(function () {
-        console.log('focus out');
-        //if this text is empty ;
+    $("input[name='task']").focusout(function () {
+        console.log('focus out on: ' + $(this).parent().parent().find('input[type="hidden"]').val());
+        //if this text is empty and has no id save as new;
+        if($(this).parent().parent().find('input[type="hidden"]').val() == ""){
+            console.log('we have an id, update');
+        }
+        else{
+            console.log('no id, save new as: ' + $(this).val());
+            var jqxhr = $.ajax({
+                type: "POST",
+                url:"save",
+                data: $(this).val()
+            })
+                .done(function(data) {
+                    console.log("success" + data );
+                })
+                .fail(function(data) {
+                    console.log("error " + data );
+                })
+                .always(function() {
+                    console.log("complete" );
+                });
+        }
     });
 
     $('#feature-form').submit(function () {
         //var url=$("#myForm").attr("action");
-
         //each action should be a call with AJAX
 
     });
