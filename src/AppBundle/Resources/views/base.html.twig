@@ -1,41 +1,47 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        <meta charset="UTF-8" />
-        <link rel="stylesheet" href="{{ asset('/web/bower_components/foundation/css/foundation.css') }}">
-        <link rel="stylesheet" href="{{ asset('/web/bower_components/foundation/css/app.css')}}">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" href="{{ asset('/web/bower_components/foundation/css/foundation.css') }}">
+    <link rel="stylesheet" href="{{ asset('/web/css/app.css') }}">
 
-        <script src="{{asset('/web/bower_components/foundation/js/vendor/modernizr.js')}}"></script>
-        <title>{% block title %}Welcome!{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
-        <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
-    </head>
-    <body>
-    {% if is_granted('IS_AUTHENTICATED_FULLY') %}
-        <p class="right">Welcome: {{ app.user.firstname }} / <a href="{{ path('log_out') }}">Logout</a> </p>
-    {% else %}
-        <p class="right"><a href="{{ path('login_route') }}">Login</a></p>
-    {% endif %}
-        {% block nav %}
-        <div class="row">
-            <div class="small-6 columns">
-                <ul class="inline-list">
-                    <li><a href="{{ path('home') }}" >Home</a></li>
-                    <li><a href="{{ path('user') }}" >Users</a></li>
-                    <li><a href="{{ path('features') }}" >Features</a></li>
-                    <li><a href="{{ path('test') }}" >Test</a></li>
-                </ul>
-            </div>
+    <script src="{{ asset('/web/bower_components/foundation/js/vendor/modernizr.js') }}"></script>
 
+    <title>{% block title %}Welcome!{% endblock %}</title>
+    {% block stylesheets %}{% endblock %}
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+</head>
+<body>
+{% if is_granted('IS_AUTHENTICATED_FULLY') %}
+    <p class="right">Welcome: {{ app.user.firstname }} / <a href="{{ path('log_out') }}">Logout</a></p>
+{% else %}
+    <p class="right"><a href="{{ path('login_route') }}">Login</a></p>
+{% endif %}
+{% block nav %}
+    <div class="row">
+        <div class="small-6 columns">
+            <ul class="inline-list">
+                <li><a href="{{ path('home') }}">Home</a></li>
+                <li><a href="{{ path('user') }}">Users</a></li>
+                <li><a href="{{ path('features') }}">Features</a></li>
+                <li><a href="{{ path('test') }}">Test</a></li>
+            </ul>
         </div>
 
-        {% endblock %}
-        {% block body %}{% endblock %}
-        {% block javascripts %}{% endblock %}
-        <script src="{{asset('/web/bower_components/foundation/js/vendor/jquery.js')}}"></script>
-        <script src="{{asset('/web/bower_components/foundation/js/foundation.min.js')}}"></script>
-        <script>
-            $(document).foundation();
-        </script>
-    </body>
+    </div>
+
+{% endblock %}
+
+{% block body %}
+
+
+{% endblock %}
+{% block javascripts %}{% endblock %}
+<script src="{{ asset('/web/bower_components/foundation/js/vendor/jquery.js') }}"></script>
+<script src="{{ asset('/web/bower_components/foundation/js/foundation.min.js') }}"></script>
+<script src="{{ asset('/web/js/app.js') }}"></script>
+<script>
+    //$(document).foundation();
+</script>
+</body>
 </html>

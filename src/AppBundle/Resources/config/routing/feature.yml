@@ -1,0 +1,32 @@
+#feature_show:
+#    path:     /{id}/show
+#    defaults: { _controller: "AppBundle:features:show" }
+
+#feature_new:
+#    path:     /new
+#    defaults: { _controller: "AppBundle:feature:new" }
+
+#feature_edit:
+#    path:     /{id}/edit
+#    defaults: { _controller: "AppBundle:features:edit" }
+
+features:
+    path:     /
+    defaults: { _controller: "AppBundle:features:show" }
+
+# can we maintain the REST api here?
+feature_create:
+    path:     /save
+    defaults: { _controller: "AppBundle:features:create" }
+    requirements: { _method: post }
+
+feature_update:
+    path:     /{id}/update
+    defaults: { _controller: "AppBundle:features:update" }
+    requirements: { _method: post|put }
+
+feature_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "AppBundle:features:delete" }
+    requirements: { _method: post|delete }
+

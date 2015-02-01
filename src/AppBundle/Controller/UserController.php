@@ -232,6 +232,11 @@ class UserController extends Controller
         if ($editForm->isValid()) {
             $em->flush();
 
+            $request->getSession()->getFlashBag()->set(
+                'notice',
+                'Your changes were saved!'
+            );
+
             return $this->redirect($this->generateUrl('user_edit', array('id' => $id)));
         }
 

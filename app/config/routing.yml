@@ -14,10 +14,6 @@ json:
     path: /json
     defaults: { _controller: AppBundle:Default:json }
 
-features:
-    path: /features
-    defaults: { _controller: AppBundle:Default:features }
-
 app_video:
     resource: "@AppBundle/Resources/config/routing/video.yml"
     prefix:   /video
@@ -25,6 +21,10 @@ app_video:
 app_user:
     resource: "@AppBundle/Resources/config/routing/user.yml"
     prefix:   /user
+
+app_feature:
+    resource: "@AppBundle/Resources/config/routing/feature.yml"
+    prefix:   /features
 
 login_route:
     path:     /login
