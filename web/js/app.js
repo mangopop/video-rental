@@ -18,7 +18,8 @@ $(document).ready(function () {
         //console.log('added: '+ added);
     }
 
-    //append or remove last row from for depending on text in greyed-out class
+    // *** append or remove last row from for depending on text in greyed-out class ************ /
+
     $(document.body).on('focusin', 'input[name="task"]' ,function(){
     //$('.greyed-out').focusin(function () {
         //console.log('focus in');
@@ -66,27 +67,76 @@ $(document).ready(function () {
 
     });
 
+    // *** save or update ************************************************************************ //
+
     $("input[name='task']").focusout(function () {
-        console.log('focus out on: ' + $(this).parent().parent().find('input[type="hidden"]').val());
-        //if this text is empty and has no id save as new;
-        if($(this).parent().parent().find('input[type="hidden"]').val() == ""){
-            console.log('we have an id, update');
+
+        // PUT THE CORRECT CLASSES ON IF INPUT HAS CONTENT
+        if($(this).val() != ""){
+            //remove this .greyed-out. Or could do it on save
+            $(this).removeClass('greyed-out');
+            //remove siblings child (inout) of .secondary
+            $(this).parent().next().find(".secondary").removeClass('secondary')
         }
+        console.log('focus out on: ' + $(this).parent().parent().find('input[type="hidden"]').val());
+
+
+        // FIND OUT IF HIDDEN INPUT HAS ID, IF IT DOES PASS this to the update page
+        if($(this).parent().parent().find('input[type="hidden"]').length > 0 ){
+            //console.log('find hidden value: ' + $(this).parent().parent().length);
+            //console.log('we have an id, update ' + $(this).val());
+            var id = $(this).parent().parent().find('input[type="hidden"]').val();
+            console.log('id for update: '+$(this).parent().parent().find('input[type="hidden"]').val());
+            var row = $(this).parent().parent();
+            var self = this;
+            var data = {text:$(this).val(),id:id};
+            console.log('text for update:'+ data.text);
+            var jqxhr = $.ajax({
+                context: this,
+                type: "POST",
+                url: data.id + "/update",
+                //data: $(this).val()
+                data: data
+                })
+                .done(function(data) {
+                    //Has this just started working? YEEEEESSS!
+                    //var obj = $.parseJSON(data);
+                    console.log("success: " + data );
+                })
+                .fail(function(data) {
+                    console.log("error " + data );
+                    $('#result').text(data);
+                    //console.log($(this).parent().parent());
+                })
+                .always(function(data) {
+                    console.log("always, complete" );
+                    //var obj = $.parseJSON(data);
+                    console.log("this" +  row );
+                    //$(this).parent().parent().append('<input type="hidden" class="id" value=""/>');
+                });
+        }// IF IT HAS SOMETHING, SAVE NEW
         else{
             console.log('no id, save new as: ' + $(this).val());
             var jqxhr = $.ajax({
                 type: "POST",
+                context: this,
                 url:"save",
                 data: $(this).val()
-            })
+                })
                 .done(function(data) {
-                    console.log("success" + data );
+                    var obj = $.parseJSON(data);
+                    console.log($(this));
+                    //TODO get this into function so we can append $id
+                    $(this).parent().parent().append('<input type="hidden" class="id" value="'+obj.id+'"/>');
+                    console.log("success: " + obj.id );
                 })
                 .fail(function(data) {
                     console.log("error " + data );
+
                 })
-                .always(function() {
+                .always(function(data) {
                     console.log("complete" );
+
                 });
         }
     });
