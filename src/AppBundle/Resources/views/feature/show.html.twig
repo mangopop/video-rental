@@ -17,7 +17,7 @@
                 <input type="text" name="task" value="{{ feature.task }}"/>
             </div>
             <div class="small-1 columns end">
-                <input class="button tiny" type="button" value="Delete"/>
+                <input class="button tiny" type="button" name="{{ feature.id }}" value="Delete"/>
             </div>
         </div>
         {% endfor %}
