@@ -4,6 +4,8 @@ namespace AppBundle\Form;
 
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
 
 class UserType extends AbstractType
@@ -18,6 +20,7 @@ class UserType extends AbstractType
             ->add('firstname')
             ->add('lastname')
             ->add('username')
+            //->add('password') //don't want to see this with editing, only creation
             ->add('roles', 'entity', array(
                     'multiple'      => true,
                     'expanded'      => true,
@@ -26,9 +29,22 @@ class UserType extends AbstractType
 //                    'error_bubbling' => true,
 //                    'required' => true,
                 ))
-            ->add('email','email')
-//            ->add('videos') get blank page when this is on
-        ;
+            ->add('email','email');
+
+//            ->add('videos'); get blank page when this is on
+
+        //only show the password field if creating a new user
+        $builder->addEventListener(FormEvents::PRE_SET_DATA, function (FormEvent $event) {
+                $user = $event->getData();
+                $form = $event->getForm();
+
+                // check if the Product object is "new"
+                // If no data is passed to the form, the data is "null".
+                // This should be considered a new "Product"
+                if (!$user || null === $user->getId()) {
+                    $form->add('password', 'text');
+                }
+            });
     }
     
     /**
