@@ -69,20 +69,24 @@ $(document).ready(function () {
 
     // *** save or update ************************************************************************ //
 
-    $("input[name='task']").focusout(function () {
+    $(document.body).on('focusout', 'input[name="task"]', function () {
+    //$("input[name='task']").focusout(function () {
 
-        // PUT THE CORRECT CLASSES ON IF INPUT HAS CONTENT
+        console.log('focus out on: ' + $(this).parent().parent().find('input[type="hidden"]').val());
+
+        // change from grey to blue
         if ($(this).val() != "") {
             //remove this .greyed-out. Or could do it on save
             $(this).removeClass('greyed-out');
             //remove siblings child (inout) of .secondary
             $(this).parent().next().find(".secondary").removeClass('secondary')
         }
-        console.log('focus out on: ' + $(this).parent().parent().find('input[type="hidden"]').val());
+
 
 
         // FIND OUT IF HIDDEN INPUT HAS ID, IF IT DOES PASS this to the update page
         if ($(this).parent().parent().find('input[type="hidden"]').length > 0) {
+
             //console.log('find hidden value: ' + $(this).parent().parent().length);
             //console.log('we have an id, update ' + $(this).val());
             var id = $(this).parent().parent().find('input[type="hidden"]').val();
@@ -114,9 +118,11 @@ $(document).ready(function () {
                     console.log("this" + row);
                     //$(this).parent().parent().append('<input type="hidden" class="id" value=""/>');
                 });
-        }// IF IT HAS SOMETHING, SAVE NEW
-        else {
-            //TODO get delete button and change delete text to saving
+
+
+        }// IF IT HAS nothing, SAVE NEW
+        else if($(this).val() != "") {
+
             //console.log($(this).parent().next().find('input').attr('value').text('Saving'));
             $(this).parent().next().find('input').attr('value', 'Saving');
             $(this).parent().next().find('input').addClass('success');
