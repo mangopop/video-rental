@@ -10,9 +10,15 @@
         {% for feature in features %}
         <div class="row">
             <input type="hidden" class="id" value="{{ feature.id }}"/>
-            <div class="small-1 columns"><input type="checkbox"/></div>
-            <div class="small-6 columns"><input type="text" name="task" value="{{ feature.task }}"/></div>
-            <div class="small-1 columns end"><input class="button tiny" type="button" value="Delete"/></div>
+            <div class="small-1 columns">
+                <input type="checkbox"/>
+            </div>
+            <div class="small-6 columns">
+                <input type="text" name="task" value="{{ feature.task }}"/>
+            </div>
+            <div class="small-1 columns end">
+                <input class="button tiny" type="button" value="Delete"/>
+            </div>
         </div>
         {% endfor %}
     </form>

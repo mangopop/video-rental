@@ -116,6 +116,10 @@ $(document).ready(function () {
                 });
         }// IF IT HAS SOMETHING, SAVE NEW
         else{
+            //TODO get delete button and change delete text to saving
+            //console.log($(this).parent().next().find('input').attr('value').text('Saving'));
+            $(this).parent().next().find('input').attr('value', 'Saving');
+            $(this).parent().next().find('input').addClass('alert');
             console.log('no id, save new as: ' + $(this).val());
             var jqxhr = $.ajax({
                 type: "POST",
@@ -126,11 +130,13 @@ $(document).ready(function () {
                 .done(function(data) {
                     var obj = $.parseJSON(data);
                     console.log($(this));
-                    //TODO get this into function so we can append $id
+                    $(this).parent().next().find('input').attr('value', 'Delete');
+                    $(this).parent().next().find('input').removeClass('alert');
                     $(this).parent().parent().append('<input type="hidden" class="id" value="'+obj.id+'"/>');
                     console.log("success: " + obj.id );
                 })
                 .fail(function(data) {
+                    $(this).parent().next().find('input').attr('value', 'Error');
                     console.log("error " + data );
 
                 })

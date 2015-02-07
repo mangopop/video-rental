@@ -89,8 +89,18 @@ class FeaturesController extends Controller
         );
     }
 
-    public function deleteAction()
+    public function deleteAction($id)
     {
+        try{
+            $em = $this->getDoctrine()->getManager();
+            $feature = $em->getRepository('AppBundle:Feature')->find($id);
+            $em->remove($feature);
+            $em->flush();
 
+            return new Response(Response::HTTP_OK);
+
+        }catch (Exception $e){
+            return new Response( 'error',  Response::HTTP_EXPECTATION_FAILED);
+        }
     }
 } 
