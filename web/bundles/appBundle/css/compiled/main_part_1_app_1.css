@@ -1,0 +1,13 @@
+body{
+    margin: 10px 10px auto;
+
+}
+
+.greyed-out{
+    color: grey
+
+}
+
+input[type="text"].greyed-out {
+    color: lightgray;
+}
