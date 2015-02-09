@@ -54,6 +54,6 @@ security:
     access_control:
         - { path: ^/demo/secured/hello/admin/, roles: ROLE_ADMIN }
         # require ROLE_ADMIN for /admin*
-        - { path: ^/user, roles: ROLE_ADMIN } #regex
-        - { path: ^/video, roles: ROLE_USER } #regex
+        #- { path: ^/user, roles: ROLE_ADMIN } #regex
+#        - { path: ^/video, roles: ROLE_USER } #regex
         #- { path: ^/login, roles: IS_AUTHENTICATED_ANONYMOUSLY, requires_channel: https }

@@ -3,19 +3,20 @@
 <head>
     <meta charset="UTF-8"/>
     {% block stylesheets %}
-        {% stylesheets
-            'bundles/appBundle/css/*'
-            'bundles/appBundle/bower_components/foundation/css/*'
-            output='bundles/appBundle/css/compiled/main.css'
-            filter='cssrewrite'
-        %}
-        <link rel="stylesheet" href="{{ asset_url }}" />
-        {% endstylesheets %}
-    {% endblock %}
-    {#<link rel="stylesheet" href="{{ asset('/bower_components/foundation/css/foundation.css') }}">#}
-    {#<link rel="stylesheet" href="{{ asset('/css/app.css') }}">#}
+        {#{% stylesheets#}
+        {#'bundles/appBundle/css/*'#}
+        {#'bundles/appBundle/bower_components/foundation/css/*'#}
+        {#output='bundles/appBundle/css/compiled/main.css'#}
+        {#filter='cssrewrite'#}
+        {#%}#}
+        {#<link rel="stylesheet" href="{{ asset_url }}" />#}
+        {#{% endstylesheets %}#}
+        <link rel="stylesheet" href="{{ asset('bundles/appBundle/bower_components/foundation/css/foundation.css') }}">
+        <link rel="stylesheet" href="{{ asset('bundles/appBundle/css/app.css') }}">
 
-    {#<script src="{{ asset('/bower_components/foundation/js/vendor/modernizr.js') }}"></script>#}
+
+    {% endblock %}
+
 
     <title>{% block title %}Welcome!{% endblock %}</title>
 
@@ -33,6 +34,7 @@
             <ul class="inline-list">
                 <li><a href="{{ path('home') }}">Home</a></li>
                 <li><a href="{{ path('user') }}">Users</a></li>
+                <li><a href="{{ path('video') }}">Videos</a></li>
                 <li><a href="{{ path('features') }}">Features</a></li>
                 <li><a href="{{ path('test') }}">Test</a></li>
             </ul>
@@ -44,21 +46,22 @@
 
 {% block body %}{% endblock %}
 
-{% block javascripts %}
-    {% javascripts
-        'bundles/appBundle/bower_components/foundation/js/foundation/*'
-        'bundles/appBundle/js/*'
-        output='bundles/appBundle/js/compiled/main.js'
-    %}
-        <script src="{{ asset_url }}"></script>
-    {% endjavascripts %}
-{% endblock %}
-
 {#{% block javascripts %}#}
-{#<script src="{{ asset('/bower_components/foundation/js/vendor/jquery.js') }}"></script>#}
-{#<script src="{{ asset('/bower_components/foundation/js/foundation.min.js') }}"></script>#}
-{#<script src="{{ asset('/js/app.js') }}"></script>#}
+{#{% javascripts#}
+{#'bundles/appBundle/bower_components/foundation/js/foundation/*'#}
+{#'bundles/appBundle/js/*'#}
+{#output='bundles/appBundle/js/compiled/main.js'#}
+{#%}#}
+{#<script src="{{ asset_url }}"></script>#}
+{#{% endjavascripts %}#}
 {#{% endblock %}#}
+
+{% block javascripts %}
+    <script src="{{ asset('/bower_components/foundation/js/vendor/modernizr.js') }}"></script>
+    <script src="{{ asset('/bower_components/foundation/js/vendor/jquery.js') }}"></script>
+    <script src="{{ asset('/bower_components/foundation/js/foundation.min.js') }}"></script>
+    <script src="{{ asset('/js/app.js') }}"></script>
+{% endblock %}
 <script>
     //$(document).foundation();
 </script>

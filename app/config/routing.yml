@@ -3,7 +3,7 @@ app:
 #    type:     yml
 
 home:
-    path: /home
+    path: / #need to trim this trailing slash
     defaults: { _controller: AppBundle:Default:index }
 
 test:
